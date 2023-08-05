@@ -20,14 +20,14 @@ metrics = {
         "security_upgrades_pending",
         "Security upgrades pending",
         ["origin"],
-        namespace="dnf",
+        namespace=namespace,
         registry=registry,
     ),
     "upgrades_pending": Gauge(
         "upgrades_pending",
         "upgrades pending",
         ["origin"],
-        namespace="dnf",
+        namespace=namespace,
         registry=registry,
     ),
 }
