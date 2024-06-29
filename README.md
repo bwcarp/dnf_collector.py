@@ -4,8 +4,21 @@
 
 The community yum.sh collector did not include a separate metric for updates with security advisories. This does, as well as leverages dnf's python library directly.
 
-This has been tested on RHEL9 and Fedora 38.
+This has been tested on:
+* RHEL9
+* CentOS Stream 9
+* AlmaLinux 8/9
+* RockyLinux 8/9
+* Fedora 38-40
 
+Enterprise Linux variants (everything here except Fedora) [need EPEL configured](https://docs.fedoraproject.org/en-US/epel/).
+
+Depends on the Prometheus client library and is tested with the EPEL/Fedora provided versions for all aforementioned distros.
+```
+# dnf install python3-prometheus_client
+```
+
+Help:
 ```
 % ./dnf_collector.py -h
 usage: dnf_collector.py [-h] [-o FILENAME]

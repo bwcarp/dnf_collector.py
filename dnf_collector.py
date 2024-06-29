@@ -10,6 +10,7 @@ parser.add_argument(
     metavar="FILENAME",
     help="Optional output file to use rather than standard output.",
 )
+
 args = parser.parse_args()
 
 namespace = "dnf"
@@ -32,7 +33,13 @@ metrics = {
     ),
 }
 base = dnf.Base()
+base.conf.substitutions.update_from_etc("/")
 base.read_all_repos()
+
+for repo in base.repos.iter_enabled():
+    metrics["upgrades_pending"].labels(repo.id).set(0)
+    metrics["security_upgrades_pending"].labels(repo.id).set(0)
+
 base.fill_sack()
 q = base.sack.query()
 q_up = q.upgrades().filter(latest=1)
